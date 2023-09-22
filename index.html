@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Parameter Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+    
+        h1, h2 {
+            margin: 10px 0;
+        }
+    
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            color: #fff;
+        }
+    
+        #successButton {
+            background-color: #28a745; /* Green color for Success button */
+        }
+    
+        #failureButton {
+            background-color: #dc3545; /* Red color for Failure button */
+        }
+    
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1 id="bank"></h1>
+    <h2 id="bic"></h2>
+    <button id="successButton">Success</button>
+    <button id="failureButton">Failure</button>
+
+    <script>
+         // Function to get query parameters from the URL
+         function getQueryParameters() {
+            const queryString = window.location.search;
+            const params = new URLSearchParams(queryString);
+            return params;
+        }
+
+        // Function to update the H1 and H2 elements with the first and second query parameters
+        function updateUI() {
+            const params = getQueryParameters();
+            const param1 = params.get('bank');
+            const param2 = params.get('bic');
+
+            const param1Element = document.getElementById('bank');
+            const param2Element = document.getElementById('bic');
+
+            if (param1Element) {
+                param1Element.textContent = `Bank: ${param1}`;
+            }
+
+            if (param2Element) {
+                param2Element.textContent = `BIC: ${param2}`;
+            }
+        }
+
+        // Function to handle the "Success" button click
+        function handleSuccessButtonClick() {
+            // Redirect to 'endowus://egiro^continue^success'
+            window.location.href = 'endowus://egiro^continue^success';
+        }
+
+        // Function to handle the "Failure" button click
+        function handleFailureButtonClick() {
+            // Redirect to 'endowus://egiro^continue^failed'
+            window.location.href = 'endowus://egiro^continue^failed';
+        }
+
+        // Add event listeners to the buttons
+        const successButton = document.getElementById('successButton');
+        const failureButton = document.getElementById('failureButton');
+
+        if (successButton) {
+            successButton.addEventListener('click', handleSuccessButtonClick);
+        }
+
+        if (failureButton) {
+            failureButton.addEventListener('click', handleFailureButtonClick);
+        }
+
+        // Update the UI when the page loads
+        window.addEventListener('load', updateUI);
+    </script>
+</body>
+</html>
