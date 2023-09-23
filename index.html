@@ -74,13 +74,13 @@
         // Function to handle the "Success" button click
         function handleSuccessButtonClick() {
             // Redirect to 'endowus://egiro^continue^success'
-            window.location = 'endowus://egiro^continue^success';
+            window.open('endowus://egiro^continue^success', '_self');
         }
 
         // Function to handle the "Failure" button click
         function handleFailureButtonClick() {
             // Redirect to 'endowus://egiro^continue^failed'
-            window.location = 'endowus://egiro^continue^failed';
+            window.open('endowus://egiro^continue^failed', '_self');
         }
 
         // Add event listeners to the buttons
